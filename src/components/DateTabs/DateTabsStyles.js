@@ -1,9 +1,11 @@
 const styles = (theme) => ({
-	root: {
+	tabRoot: {
 		color: theme.palette.common.gray,
-		fontSize: '16px'
+		fontSize: '16px',
+		minWidth: '50px',
+		borderBottom: `2px solid ${theme.palette.common.gray}`
 	},
-	selected: {
+	tabSelected: {
 		color: theme.palette.primary.main
 	},
 	shortDate: {

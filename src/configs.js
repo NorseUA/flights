@@ -8,3 +8,5 @@ export const dataTypes = {
 	ARRIVAL: 'arrival',
 	DEPARTURE: 'departure'
 };
+
+export const defaultLocale = 'uk';

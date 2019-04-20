@@ -25,7 +25,7 @@ class BoardTabs extends Component {
 				onChange={this.props.changeView}
 				value={this.props.currentView}
 				variant="fullWidth"
-				TabIndicatorProps={{ color: 'transparent' }}
+				TabIndicatorProps={{ style: { backgroundColor: 'transparent'} }}
 				classes={{ root: classes.wrapper }}
 			>
 				{this.renderTab(classes, tabTypes.DEPARTURE)}

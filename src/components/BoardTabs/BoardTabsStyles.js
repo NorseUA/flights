@@ -1,7 +1,5 @@
 const styles = (theme) => ({
 	wrapper: {
-		width: '80%',
-		margin: '50px auto 0',
 		backgroundColor: theme.palette.secondary.main,
 		borderTopLeftRadius: '50px',
 		borderTopRightRadius: '50px',

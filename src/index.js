@@ -7,11 +7,10 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import translations from './i18n/locales';
+import { defaultLocale } from './configs';
 
 addLocaleData(uaLocaleData);
 addLocaleData(enLocaleData);
-
-const defaultLocale = 'uk';
 
 const renderApp = (locale) => ReactDOM.render(
 	<IntlProvider

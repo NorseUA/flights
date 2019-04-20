@@ -3,5 +3,11 @@
   "tab.arrival.label": "Arrival",
   "closerDays.yesterday": "Yesterday",
   "closerDays.today": "Today",
-  "closerDays.tomorrow": "Tomorrow"
+  "closerDays.tomorrow": "Tomorrow",
+  "table.head.terminal": "Terminal",
+  "table.head.time":"Local time",
+  "table.head.destination": "Destination",
+  "table.head.status":"Status",
+  "table.head.airline": "Airline",
+  "table.head.flight":"Flight"
 }

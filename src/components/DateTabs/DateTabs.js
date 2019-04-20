@@ -5,26 +5,28 @@ import Tab from '@material-ui/core/Tab';
 import { withStyles } from '@material-ui/core';
 import styles from '../DateTabs/DateTabsStyles';
 
-const renderLabel = (date, label, classes) => {
+const renderIcon = (date, classes) => {
 	const shortDate = date.replace(/-/, '/').split('-')[0];
-	return (
-		<div>
-			<div className={classes.shortDate}>{shortDate}</div>
-			<div>{label}</div>
-		</div>
-	);
+	return (<span className={classes.shortDate}>{shortDate}</span>);
 };
 
 const DateTabs = props => {
+	const { classes, dates, currentDate, changeDate } = props;
+
 	return (
-		<Tabs indicatorColor="primary" value={props.currentDate} onChange={props.changeDate}>
-			{props.dates
+		<Tabs
+			indicatorColor="primary"
+			value={currentDate}
+			onChange={changeDate}
+		>
+			{dates
 				.map(({ date, label }) => (
 					<Tab
-						classes={props.classes}
+						classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
 						key={date}
 						value={date}
-						label={renderLabel(date, label, props.classes)}
+						label={label}
+						icon={renderIcon(date, classes) }
 					/>
 				))}
 		</Tabs>

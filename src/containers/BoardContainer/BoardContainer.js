@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Board } from '../../components';
 import callApi from '../../utils/apiClient';
 import { endpoints } from '../../configs';
-import formatDate from '../../utils/formatDate';
+import { formatDate } from '../../utils/dateFormatters';
 import formatFlightsData from '../../utils/formatFlightsData';
 import { defaultTabType } from '../../components/BoardTabs/constants';
 import getCloserDates from "../../utils/buildCloserDates";
@@ -54,6 +54,7 @@ class BoardContainer extends Component {
 				currentDate={currentDate}
 				data={data}
 				dates={this.state.closerDates}
+				locale={this.props.intl.locale}
 			/>
 		);
 	}

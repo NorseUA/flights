@@ -3,5 +3,11 @@
   "tab.arrival.label": "Прилiт",
   "closerDays.yesterday": "Вчора",
   "closerDays.today": "Сьогоднi",
-  "closerDays.tomorrow": "Завтра"
+  "closerDays.tomorrow": "Завтра",
+  "table.head.terminal": "Термінал",
+  "table.head.time":"Розклад",
+  "table.head.destination": "Призначення",
+  "table.head.status":"Статус",
+  "table.head.airline": "Авіакомпанія",
+  "table.head.flight":"Рейс"
 }
