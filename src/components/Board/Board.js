@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { BoardTabs } from '../../components';
+import { BoardTabs, DateTabs } from '../../components';
 
 class Board extends Component {
 	render() {
@@ -11,6 +11,11 @@ class Board extends Component {
 					changeView={this.props.changeView}
 					currentView={this.props.currentView}
 				/>
+				<DateTabs
+					changeDate={this.props.changeDate}
+					currentDate={this.props.currentDate}
+					dates={this.props.dates}
+				/>
 			</div>
 		);
 	}
@@ -19,6 +24,9 @@ class Board extends Component {
 Board.propTypes = {
 	changeView: PropTypes.func,
 	currentView: PropTypes.string,
+	changeDate: PropTypes.func,
+	currentDate: PropTypes.string,
+	dates: PropTypes.array,
 	data: PropTypes.array
 };
 

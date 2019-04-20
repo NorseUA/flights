@@ -20,7 +20,7 @@ const renderApp = (locale) => ReactDOM.render(
 		key={locale}
 		messages={translations[locale]}
 	>
-		<App currentLocale={locale} switchLocale={renderApp} />
+		<App currentLocale={locale} switchLocale={renderApp}/>
 	</IntlProvider>,
 	document.getElementById('root')
 );

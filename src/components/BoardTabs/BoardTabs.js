@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl.macro';
 import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs/index';
 import Tab from '@material-ui/core/Tab/index';
-
 // styles
 import styles from './BoardTabsStyles';
 import { tabTypes } from './constants';
@@ -13,7 +12,7 @@ class BoardTabs extends Component {
 	renderTab = (classes, type) => (
 		<Tab
 			value={type}
-			label={( <FormattedMessage id={`tab.${type}.label`} /> )}
+			label={(<FormattedMessage id={`tab.${type}.label`}/>)}
 			classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
 		/>
 	);
