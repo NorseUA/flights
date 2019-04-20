@@ -1,4 +1,7 @@
 {
   "tab.departure.label": "Departure",
-  "tab.arrival.label": "Arrival"
+  "tab.arrival.label": "Arrival",
+  "closerDays.yesterday": "Yesterday",
+  "closerDays.today": "Today",
+  "closerDays.tomorrow": "Tomorrow"
 }

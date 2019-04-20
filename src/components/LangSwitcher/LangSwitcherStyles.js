@@ -1,8 +1,8 @@
-const styles = {
+const styles = (theme) => ({
 	root: {
-		backgroundColor: '#1eb7ee',
-		color: '#fff'
+		backgroundColor: theme.palette.primary.main,
+		color: theme.palette.common.white
 	}
-};
+});
 
 export default styles;

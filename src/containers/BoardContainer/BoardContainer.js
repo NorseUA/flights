@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Board } from '../../components';
 import callApi from '../../utils/apiClient';
 import { endpoints } from '../../configs';
 import formatDate from '../../utils/formatDate';
 import formatFlightsData from '../../utils/formatFlightsData';
 import { defaultTabType } from '../../components/BoardTabs/constants';
+import getCloserDates from "../../utils/buildCloserDates";
+import { injectIntl } from "react-intl";
 
 class BoardContainer extends Component {
 	// For this sort of things better solution is to use state managers like Mobx/Redux etc.
-	state = {
-		currentDate: formatDate(new Date(2019, 3, 10)),
-		currentView: defaultTabType,
-		flightsData: null
-	};
+	constructor(props) {
+		super(props);
+		this.state = {
+			currentDate: formatDate(),
+			currentView: defaultTabType,
+			closerDates: getCloserDates(props.intl.messages),
+			flightsData: null
+		};
+	}
+
 
 	componentDidMount() {
 		this.fetchData(this.state.currentDate);
@@ -34,16 +42,6 @@ class BoardContainer extends Component {
 		this.setState({ currentDate: value });
 	};
 
-	buildDates = () => {
-		const { flightsData, currentView } = this.state;
-		const currentViewData = flightsData && flightsData[currentView];
-		const dates = Object.keys(currentViewData || {});
-
-		return dates
-			.splice(0, 3)
-			.map(key => ({ date: key, label: key }));
-	};
-
 	render() {
 		const { currentView, currentDate, flightsData } = this.state;
 		const data = (flightsData && flightsData[currentView] && flightsData[currentView][currentDate]) || [];
@@ -55,10 +53,14 @@ class BoardContainer extends Component {
 				currentView={currentView}
 				currentDate={currentDate}
 				data={data}
-				dates={this.buildDates()}
+				dates={this.state.closerDates}
 			/>
 		);
 	}
 }
 
-export default BoardContainer;
+BoardContainer.propTypes = {
+	intl: PropTypes.object
+};
+
+export default injectIntl(BoardContainer);

@@ -3,12 +3,15 @@ import { dataTypes } from '../configs';
 const formatData = (data) => data
 	.reduce((acc, item) => {
 		const date = (item.actual || '').split('T')[0];
-		const formattedDate = date.split('-').reverse().map(Number).join('-');
+		const formattedDate = date.split('-').reverse().join('-');
 
-		acc[formattedDate] ? acc[formattedDate].push(item) : acc[formattedDate] = [item];
+		if (Object.keys(acc).length < 3) {
+			acc[formattedDate] ? acc[formattedDate].push(item) : acc[formattedDate] = [item];
+		}
 
 		return acc;
 	}, {});
+
 
 const formatFlightsData = (flightsData) => Object
 	.values(dataTypes)

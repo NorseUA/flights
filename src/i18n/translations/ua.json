@@ -1,4 +1,7 @@
 {
   "tab.departure.label": "Вилiт",
-  "tab.arrival.label": "Прилiт"
+  "tab.arrival.label": "Прилiт",
+  "closerDays.yesterday": "Вчора",
+  "closerDays.today": "Сьогоднi",
+  "closerDays.tomorrow": "Завтра"
 }

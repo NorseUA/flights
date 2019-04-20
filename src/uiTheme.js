@@ -9,6 +9,11 @@ const theme = createMuiTheme({
 		secondary: {
 			main: '#73d2f0',
 			contrastText: '#fff'
+		},
+		common: {
+			black: '#000',
+			white: '#fff',
+			gray: '#b8b9b9'
 		}
 	}
 });
