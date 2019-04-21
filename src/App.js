@@ -1,10 +1,16 @@
+// Modules
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { MuiThemeProvider } from '@material-ui/core/styles';
+
+// Components
 import { Header, LangSwitcher } from './components';
 import { BoardContainer } from './containers';
+
+// Utils
 import theme from './uiTheme';
 
+// Styles
 import './App.css';
 
 class App extends Component {
