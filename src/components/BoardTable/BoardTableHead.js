@@ -1,15 +1,19 @@
+// Modules
 import React from 'react';
 import PropTypes from 'prop-types';
-import TableRow from '@material-ui/core/TableRow';
+
+// Components
+import { TableRow,TableHead } from '@material-ui/core';
 import { FormattedMessage } from 'react-intl.macro';
-import TableHead from '@material-ui/core/TableHead';
 import BoardTableCell from './BoardTableCell';
-import tableColumnsConfig from './tableConfig';
+
+// Utils
+import getTableColumnsConfig from '../../utils/getTableConfig';
 
 const BoardTableHead = (props) => (
-	<TableHead>
+	<TableHead className={props.className}>
 		<TableRow>
-			{tableColumnsConfig(props.locale).map(item => (
+			{getTableColumnsConfig(props.locale).map(item => (
 				<BoardTableCell key={item.label}>
 					<FormattedMessage id={`table.head.${item.label}`}/>
 				</BoardTableCell>
@@ -19,7 +23,8 @@ const BoardTableHead = (props) => (
 );
 
 BoardTableHead.propTypes = {
-	locale: PropTypes.string
+	locale: PropTypes.string,
+	className: PropTypes.string
 };
 
 export default BoardTableHead;

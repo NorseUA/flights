@@ -5,9 +5,7 @@ const formatData = (data) => data
 		const date = (item.actual || '').split('T')[0];
 		const formattedDate = date.split('-').reverse().join('-');
 
-		if (Object.keys(acc).length < 3) {
-			acc[formattedDate] ? acc[formattedDate].push(item) : acc[formattedDate] = [item];
-		}
+		acc[formattedDate] ? acc[formattedDate].push(item) : acc[formattedDate] = [item];
 
 		return acc;
 	}, {});

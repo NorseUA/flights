@@ -1,43 +1,66 @@
-import React from 'react';
+// Modules
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
+// Components
+import { TableRow } from '@material-ui/core';
 import BoardTableCell from './BoardTableCell';
-import TableRow from '@material-ui/core/TableRow';
-import tableColumnsConfig from './tableConfig';
+import { FormattedMessage } from 'react-intl.macro';
+import { FormattedTime } from 'react-intl';
 
-const getData = (obj, path) => {
-	if (path in obj) { return obj[path]; }
+// Utils
+import getData from '../../utils/getDataByPath';
+import getStatuses from '../../utils/getStatuses';
+import getTableColumnsConfig, { tableColumnNames } from '../../utils/getTableConfig';
 
-	if (path.includes('.')) {
-		const deepPath = path.split('.');
+class BoardTableRow extends Component {
+	formatStatus = () => {
+		const statuses = getStatuses(this.props.currentView);
+		const status = statuses[this.props.data.status] || { label: this.props.data.status };
+		const statusTime = status.timeKey ? getData(this.props.data, status.timeKey) : null;
 
-		return deepPath.reduce((acc, key) => {
-			if ((acc instanceof Object)) {
-				if(key in acc) {
-					acc = acc[key];
-				} else {
-					acc = null;
-				}
+		return (
+			<>
+				<FormattedMessage id={`flight.status.${status.label}`}/>&nbsp;{statusTime && (
+				<FormattedTime value={statusTime}/>)}
+			</>
+		);
+	};
+
+	renderContent = ({ label, dataKey, additional }) => {
+		switch (label) {
+			case tableColumnNames.STATUS: {
+				return this.formatStatus();
 			}
-			return acc;
-		}, obj);
-	}
-};
-
-const BoardTableRow = (props) => (
-	<TableRow className={props.styles}>
-		{tableColumnsConfig(props.locale, props.currentView)
-			.map(item => {
-				const data = getData(props.data, item.dataKey);
-				const additional = item.additional ? getData(props.data, item.additional) : '';
-
-				return (
-					<BoardTableCell key={item.label}>{`${data}${additional}`}</BoardTableCell>
-				)
-			})
+			case tableColumnNames.TIME: {
+				const time = getData(this.props.data, dataKey);
+				return (<FormattedTime value={time}/>);
+			}
+			default: {
+				const data = getData(this.props.data, dataKey);
+				const additionalData = additional ? getData(this.props.data, additional) : '';
+				return `${data}${additionalData}`;
+			}
 		}
-	</TableRow>
-);
+	};
 
+	render() {
+		const tableConfig = getTableColumnsConfig(this.props.locale, this.props.currentView);
+
+		return (
+			<TableRow className={this.props.styles}>
+				{tableConfig
+					.map(item => (
+							<BoardTableCell key={item.label}>
+								{this.renderContent(item)}
+							</BoardTableCell>
+						)
+					)
+				}
+			</TableRow>
+		);
+	}
+}
 
 BoardTableRow.propTypes = {
 	locale: PropTypes.string,

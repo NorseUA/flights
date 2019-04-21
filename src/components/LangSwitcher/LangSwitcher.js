@@ -1,15 +1,13 @@
+// Modules
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuList from '@material-ui/core/MenuList'
-import Button from '@material-ui/core/Button';
-import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
-import Popper from '@material-ui/core/Popper';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+
+// Components
+import { Button, ClickAwayListener, Grow, MenuItem, MenuList, Paper, Popper, } from '@material-ui/core';
 import { supportedLocales } from '../../i18n/locales';
 
+// Styles
 import styles from './LangSwitcherStyles';
 
 class LangSwitcher extends Component {

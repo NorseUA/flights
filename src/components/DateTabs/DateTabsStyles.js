@@ -9,7 +9,7 @@ const styles = (theme) => ({
 		color: theme.palette.primary.main
 	},
 	shortDate: {
-		fontSize:'12px',
+		fontSize: '12px',
 		marginBottom: '5px'
 	}
 });

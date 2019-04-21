@@ -10,7 +10,7 @@ const styles = (theme) => ({
 		backgroundColor: theme.palette.secondary.main,
 		color: theme.palette.common.white,
 		fontSize: '24px',
-		opacity: 1
+		opacity: 1,
 	},
 	tabSelected: {
 		backgroundColor: theme.palette.common.white,

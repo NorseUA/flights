@@ -1,12 +1,14 @@
+// Modules
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
 
+// Components
+import { Table, TableBody } from '@material-ui/core';
 import BoardTableHead from './BoardTableHead';
 import BoardTableRow from './BoardTableRow';
 
+// Styles
 import styles from './BoardTableStyles';
 
 function BoardTable(props) {
@@ -14,7 +16,7 @@ function BoardTable(props) {
 
 	return (
 		<Table className={classes.table}>
-			<BoardTableHead locale={locale} />
+			<BoardTableHead locale={locale} className={classes.head}/>
 			<TableBody>
 				{flightsData.map(flight => (
 					<BoardTableRow

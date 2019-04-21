@@ -1,32 +1,52 @@
+// Modules
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core';
 
-import { BoardTabs, DateTabs, CustomDatePicker, BoardTable } from '../../components';
+// Components
+import { LinearProgress } from '@material-ui/core';
+import { FormattedMessage } from 'react-intl.macro';
+import { BoardTable, BoardTabs, CustomDatePicker, DateTabs } from '../../components';
+
+// Styles
 import styles from './BoardStyles';
 
 class Board extends Component {
+	renderNoFlightsMessage = () => (
+		<div className={this.props.classes.noFound}>
+			<FormattedMessage id="flights.noFound"/>
+		</div>
+	);
+
+	renderContent = () => (this.props.data && this.props.data.length)
+		? (<BoardTable currentView={this.props.currentView} flightsData={this.props.data} locale={this.props.locale}/>)
+		: this.renderNoFlightsMessage();
+
 	render() {
-		console.log(this.props.data);
+		const { classes, changeView, currentView, changeDate, currentDate, dates, loading } = this.props;
 		return (
-			<div className={this.props.classes.wrapper}>
+			<div className={classes.wrapper}>
 				<BoardTabs
-					changeView={this.props.changeView}
-					currentView={this.props.currentView}
+					changeView={changeView}
+					currentView={currentView}
 				/>
-				<div className={this.props.classes.contentWrapper}>
-					<div className={this.props.classes.datePanel}>
+				<div className={classes.contentWrapper}>
+					<div className={classes.datePanel}>
 						<CustomDatePicker
-							changeDate={this.props.changeDate}
-							currentDate={this.props.currentDate}
+							changeDate={changeDate}
+							currentDate={currentDate}
 						/>
 						<DateTabs
-							changeDate={this.props.changeDate}
-							currentDate={this.props.currentDate}
-							dates={this.props.dates}
+							changeDate={changeDate}
+							currentDate={currentDate}
+							dates={dates}
 						/>
 					</div>
-					<BoardTable currentView={this.props.currentView} flightsData={this.props.data} locale={this.props.locale} />
+					{
+						loading
+							? (<LinearProgress/>)
+							: (this.renderContent())
+					}
 				</div>
 			</div>
 		);
@@ -35,6 +55,7 @@ class Board extends Component {
 
 Board.propTypes = {
 	locale: PropTypes.string,
+	loading: PropTypes.bool,
 	classes: PropTypes.object,
 	changeView: PropTypes.func,
 	currentView: PropTypes.string,

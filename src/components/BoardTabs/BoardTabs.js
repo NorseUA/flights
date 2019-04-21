@@ -1,12 +1,17 @@
+// Modules
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl.macro';
 import { withStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs/index';
-import Tab from '@material-ui/core/Tab/index';
-// styles
-import styles from './BoardTabsStyles';
+
+// Components
+import { FormattedMessage } from 'react-intl.macro';
+import { Tabs, Tab } from '@material-ui/core';
+
+// Utils
 import { tabTypes } from './constants';
+
+// Styles
+import styles from './BoardTabsStyles';
 
 class BoardTabs extends Component {
 	renderTab = (classes, type) => (
@@ -25,7 +30,7 @@ class BoardTabs extends Component {
 				onChange={this.props.changeView}
 				value={this.props.currentView}
 				variant="fullWidth"
-				TabIndicatorProps={{ style: { backgroundColor: 'transparent'} }}
+				TabIndicatorProps={{ style: { backgroundColor: 'transparent' } }}
 				classes={{ root: classes.wrapper }}
 			>
 				{this.renderTab(classes, tabTypes.DEPARTURE)}

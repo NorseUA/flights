@@ -1,6 +1,7 @@
 const styles = {
 	root: {
 		flexGrow: 1,
+		position: 'relative'
 	},
 	grow: {
 		flexGrow: 1,

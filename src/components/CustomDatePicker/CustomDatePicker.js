@@ -1,12 +1,16 @@
+// Modules
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
-
-import { parseDate, formatDate } from '../../utils/dateFormatters';
-import 'react-day-picker/lib/style.css';
-import calendarIcon from '../../icons/calendar-icon.svg';
 import { withStyles } from '@material-ui/core';
+
+// Utils
+import { formatDate, parseDate } from '../../utils/dateFormatters';
+
+// Styles
+import 'react-day-picker/lib/style.css';
 import styles from './CustomDatePickerStyles';
+import calendarIcon from '../../icons/calendar-icon.svg';
 
 class CustomDatePicker extends Component {
 	shouldComponentUpdate(nextProps) {
@@ -64,4 +68,4 @@ CustomDatePicker.propTypes = {
 	classes: PropTypes.object
 };
 
-export default  withStyles(styles)(CustomDatePicker);
+export default withStyles(styles)(CustomDatePicker);

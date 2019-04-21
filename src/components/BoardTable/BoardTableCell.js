@@ -1,5 +1,8 @@
+// Modules
 import { withStyles } from '@material-ui/core';
-import TableCell from '@material-ui/core/TableCell';
+
+// Components
+import { TableCell } from '@material-ui/core';
 
 const BoardTableCell = withStyles(theme => ({
 	head: {
@@ -11,7 +14,13 @@ const BoardTableCell = withStyles(theme => ({
 	},
 	root: {
 		border: 'none',
-		padding: '18px 10px'
+		padding: '18px 10px',
+		fontWeight: '300',
+
+		[theme.breakpoints.down('sm')]: {
+			flex: '40%',
+			maxWidth: '40%'
+		}
 	}
 }))(TableCell);
 
