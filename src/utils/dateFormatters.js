@@ -1,12 +1,15 @@
 const DATE_SEPARATOR = '-';
 
+const formatPart = (part) => (part > 9) ? part : `0${part}`;
+
 export const formatDate = (date = new Date()) => {
 	const year = date.getFullYear();
 	const month = date.getMonth() + 1;
-	const formattedMonth = (month > 9) ? month : `0${month}`;
 	const day = date.getDate();
+	const formattedDay = formatPart(day);
+	const formattedMonth = formatPart(month);
 
-	return [day, formattedMonth, year].join(DATE_SEPARATOR);
+	return [formattedDay, formattedMonth, year].join(DATE_SEPARATOR);
 };
 
 export const parseDate = (formattedDate) => {
