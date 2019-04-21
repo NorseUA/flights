@@ -4,4 +4,5 @@ export { default as BoardTabs } from './BoardTabs/BoardTabs';
 export { default as BoardTable } from './BoardTable/BoardTable';
 export { default as LangSwitcher } from './LangSwitcher/LangSwitcher';
 export { default as DateTabs } from './DateTabs/DateTabs';
+export { default as SearchBox } from './SearchBox/SearchBox';
 export { default as CustomDatePicker } from './CustomDatePicker/CustomDatePicker';

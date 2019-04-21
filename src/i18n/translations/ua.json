@@ -22,5 +22,8 @@
   "flight.status.cancelled": "Відмінено",
   "flights.noFound": "Немає рейсів",
   "error": "Помилка",
-  "error.defaultMessage": "Щось пішло не так. Будь-ласка спробуйте пізніше."
+  "error.defaultMessage": "Щось пішло не так. Будь-ласка спробуйте пізніше.",
+  "searchBox.button": "Знайти",
+  "searchBox.placeholder": "Номер рейсу або мiсто",
+  "mainTitle": "Пошук рейсу"
 }

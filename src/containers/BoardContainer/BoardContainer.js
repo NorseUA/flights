@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
 // Components
-import { Board } from '../../components';
-import { Dialog, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core';
+import { Board, SearchBox } from '../../components';
+import { Dialog, DialogContent, DialogContentText, DialogTitle, Typography, withStyles } from '@material-ui/core';
 import { FormattedMessage } from 'react-intl.macro';
 
 // Utils
@@ -15,6 +15,11 @@ import formatFlightsData from '../../utils/formatFlightsData';
 import getCloserDates from '../../utils/buildCloserDates';
 import callApi from '../../utils/apiClient';
 import { defaultTabType } from '../../components/BoardTabs/constants';
+import getData from '../../utils/getDataByPath';
+import filterFlightsDataByQuery from '../../utils/filterFlightsDataByQuery';
+
+// Styles
+import styles from './BoardContainerStyles';
 
 class BoardContainer extends Component {
 	// For this sort of things better solution is to use state managers like Mobx/Redux etc.
@@ -26,7 +31,8 @@ class BoardContainer extends Component {
 			currentDate: formatDate(),
 			currentView: defaultTabType,
 			closerDates: getCloserDates(props.intl.messages),
-			flightsData: null
+			flightsData: null,
+			query: ''
 		};
 	}
 
@@ -40,12 +46,15 @@ class BoardContainer extends Component {
 		currentDate: formattedDate
 	});
 
-	fetchFailed = (formattedDate, err) => this.setState({
-		loading: false,
-		flightsData: null,
-		currentDate: formattedDate,
-		showMessage: true
-	});
+	fetchFailed = (formattedDate, err) => {
+		console.error(err);
+		this.setState({
+			loading: false,
+			flightsData: null,
+			currentDate: formattedDate,
+			showMessage: true
+		});
+	};
 
 	fetchData = (formattedDate) => {
 		this.setState({ loading: true });
@@ -64,9 +73,9 @@ class BoardContainer extends Component {
 	};
 
 	changeDate = (event, value) => {
-		const { flightsData = {}, currentView } = this.state;
+		const { flightsData, currentView } = this.state;
 
-		if (flightsData[currentView] && !(value in flightsData[currentView])) {
+		if (!flightsData || (flightsData[currentView] && !(value in flightsData[currentView]))) {
 			this.fetchData(value);
 		} else {
 			this.setState({ currentDate: value });
@@ -75,12 +84,27 @@ class BoardContainer extends Component {
 
 	handleCloseMessage = () => this.setState({ showMessage: false });
 
+	handleSearchByQuery = (query) => this.setState({ query });
+
+	getFilteredData = () => {
+		const { currentView, currentDate, flightsData, query } = this.state;
+		const data = getData(flightsData || [], `${currentView}.${currentDate}`) || [];
+
+		return !!query
+			? filterFlightsDataByQuery(data, query)
+			: data
+	};
+
 	render() {
-		const { currentView, currentDate, flightsData } = this.state;
-		const data = (flightsData && flightsData[currentView] && flightsData[currentView][currentDate]) || [];
+		const { currentView, currentDate } = this.state;
+		const data = this.getFilteredData();
 
 		return (
 			<Fragment>
+				<Typography variant="h2" color="inherit" className={this.props.classes.mainTitle}>
+					<FormattedMessage id="mainTitle"/>
+				</Typography>
+				<SearchBox handleSearch={this.handleSearchByQuery} />
 				<Board
 					changeView={this.changeView}
 					changeDate={this.changeDate}
@@ -111,4 +135,4 @@ BoardContainer.propTypes = {
 	intl: PropTypes.object
 };
 
-export default injectIntl(BoardContainer);
+export default injectIntl(withStyles(styles)(BoardContainer));

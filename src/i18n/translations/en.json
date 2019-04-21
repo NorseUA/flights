@@ -22,5 +22,8 @@
   "flight.status.cancelled": "Cancelled",
   "flights.noFound": "No Flight",
   "error": "Error",
-  "error.defaultMessage": "Something went wrong. Please try again later."
+  "error.defaultMessage": "Something went wrong. Please try again later.",
+  "searchBox.button": "Search",
+  "searchBox.placeholder": "Destination or flight number",
+  "mainTitle": "Search Flight"
 }
