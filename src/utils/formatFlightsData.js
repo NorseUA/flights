@@ -1,6 +1,6 @@
 import { dataTypes } from '../configs';
 
-const formatData = (data) => data
+export const groupDataByDate = (data) => data
 	.reduce((acc, item) => {
 		const date = (item.actual || '').split('T')[0];
 		const formattedDate = date.split('-').reverse().join('-');
@@ -16,7 +16,7 @@ const formatFlightsData = (flightsData) => Object
 	.reduce((acc, type) => {
 		const data = flightsData[type] || [];
 
-		acc[type] = formatData(data);
+		acc[type] = groupDataByDate(data);
 
 		return acc;
 	}, {});

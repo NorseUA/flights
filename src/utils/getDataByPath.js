@@ -11,12 +11,14 @@ const getData = (obj, path) => {
 				if (key in acc) {
 					acc = acc[key];
 				} else {
-					acc = null;
+					acc = undefined;
 				}
 			}
 			return acc;
 		}, obj);
 	}
+
+	return undefined;
 };
 
 export default getData;

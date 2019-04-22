@@ -1,0 +1,6 @@
+{
+  "arrival_ua": [{"label":"terminal","dataKey":"term"},{"label":"time","dataKey":"timeArrShedule"},{"label":"destination","dataKey":"airportFromID.city"},{"label":"status","dataKey":"status"},{"label":"airline","dataKey":"airline.ua.name","deep":true},{"label":"flight","dataKey":"carrierID.IATA","additional":"fltNo"}],
+  "arrival_en": [{"label":"terminal","dataKey":"term"},{"label":"time","dataKey":"timeArrShedule"},{"label":"destination","dataKey":"airportFromID.city_en"},{"label":"status","dataKey":"status"},{"label":"airline","dataKey":"airline.en.name","deep":true},{"label":"flight","dataKey":"carrierID.IATA","additional":"fltNo"}],
+  "departure_ua":[{"label":"terminal","dataKey":"term"},{"label":"time","dataKey":"timeDepShedule"},{"label":"destination","dataKey":"airportToID.city"},{"label":"status","dataKey":"status"},{"label":"airline","dataKey":"airline.ua.name","deep":true},{"label":"flight","dataKey":"carrierID.IATA","additional":"fltNo"}],
+  "departure_en": [{"label":"terminal","dataKey":"term"},{"label":"time","dataKey":"timeDepShedule"},{"label":"destination","dataKey":"airportToID.city_en"},{"label":"status","dataKey":"status"},{"label":"airline","dataKey":"airline.en.name","deep":true},{"label":"flight","dataKey":"carrierID.IATA","additional":"fltNo"}]
+}

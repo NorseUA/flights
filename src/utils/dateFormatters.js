@@ -1,13 +1,13 @@
 const DATE_SEPARATOR = '-';
 
-const formatPart = (part) => (part > 9) ? part : `0${part}`;
+export const formatDatePart = (part) => (part > 9) ? `${part}` : `0${part}`;
 
 export const formatDate = (date = new Date()) => {
 	const year = date.getFullYear();
 	const month = date.getMonth() + 1;
 	const day = date.getDate();
-	const formattedDay = formatPart(day);
-	const formattedMonth = formatPart(month);
+	const formattedDay = formatDatePart(day);
+	const formattedMonth = formatDatePart(month);
 
 	return [formattedDay, formattedMonth, year].join(DATE_SEPARATOR);
 };

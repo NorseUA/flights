@@ -1,7 +1,7 @@
 import { supportedLocales } from '../i18n/locales';
 
-const localeFlag = '<=locale=>';
-const fields = [
+export const localeFlag = '<=locale=>';
+const baseFields = [
 	'fltNo',
 	'carrierID.IATA',
 	'airportFromID.city',
@@ -11,7 +11,7 @@ const fields = [
 	`airline.${localeFlag}.name`
 ];
 
-const buildFieldsForSearch = () => {
+export const buildFieldsForSearch = (fields) => {
 	return fields.reduce((acc, item) => {
 		if (item.includes(localeFlag)) {
 			const localizedFields = supportedLocales
@@ -25,4 +25,4 @@ const buildFieldsForSearch = () => {
 	}, []);
 };
 
-export default buildFieldsForSearch();
+export default buildFieldsForSearch(baseFields);

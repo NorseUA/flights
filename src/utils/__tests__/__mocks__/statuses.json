@@ -1,0 +1,4 @@
+{
+  "arrival": {"CK":{"label":"checkIn"},"DL":{"label":"delayed","timeKey":"timeLandCalc"},"DP":{"label":"departed","timeKey":"timeTakeofFact"},"FR":{"label":"inFlight"},"LN":{"label":"landed","timeKey":"timeLandFact"},"ON":{"label":"onTime"},"BD":{"label":"boarding"},"CC":{"label":"checkInClosed"},"GC":{"label":"gateClosed"},"CX":{"label":"cancelled"}},
+  "departure": {"CK":{"label":"checkIn"},"DL":{"label":"delayed","timeKey":"timeDepExpectCalc"},"DP":{"label":"departed","timeKey":"timeTakeofFact"},"FR":{"label":"inFlight"},"LN":{"label":"landed","timeKey":"timeLandFact"},"ON":{"label":"onTime"},"BD":{"label":"boarding"},"CC":{"label":"checkInClosed"},"GC":{"label":"gateClosed"},"CX":{"label":"cancelled"}}
+}

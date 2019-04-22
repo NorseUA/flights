@@ -15,7 +15,7 @@ const closerDates = [
 	}
 ];
 
-const buildCloserDates = () => {
+export const buildCloserDates = () => {
 	const targetDate = new Date();
 	const today = targetDate.getDate();
 
