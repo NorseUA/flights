@@ -5,19 +5,20 @@ import PropTypes from 'prop-types';
 // Components
 import { TableRow } from '@material-ui/core';
 import BoardTableCell from './BoardTableCell';
-import { FormattedMessage } from 'react-intl.macro';
-import { FormattedTime } from 'react-intl';
+import { FormattedMessage, FormattedTime } from 'react-intl';
 
 // Utils
 import getData from '../../utils/getDataByPath';
 import getStatuses from '../../utils/getStatuses';
 import getTableColumnsConfig, { tableColumnNames } from '../../utils/getTableConfig';
+import getTerminalColor from '../../utils/getTerminalColor';
 
 class BoardTableRow extends Component {
-	formatStatus = () => {
-		const statuses = getStatuses(this.props.currentView);
-		const status = statuses[this.props.data.status] || { label: this.props.data.status };
-		const statusTime = status.timeKey ? getData(this.props.data, status.timeKey) : null;
+	formatStatus = (dataKey) => {
+		const { data, currentView } = this.props;
+		const statuses = getStatuses(currentView);
+		const status = statuses[data[dataKey]] || { label: data[dataKey] };
+		const statusTime = status.timeKey ? getData(data, status.timeKey) : null;
 
 		return (
 			<>
@@ -27,10 +28,23 @@ class BoardTableRow extends Component {
 		);
 	};
 
+	renderTerminal = (dataKey) => {
+		const { data, classes } = this.props;
+		const terminal = getData(data, dataKey) || '';
+		const color = getTerminalColor(terminal);
+
+		return (
+			<div className={`${classes.terminal} ${classes[color]}`}>{terminal}</div>
+		);
+	};
+
 	renderContent = ({ label, dataKey, additional }) => {
 		switch (label) {
+			case tableColumnNames.TERMINAL: {
+				return this.renderTerminal(dataKey);
+			}
 			case tableColumnNames.STATUS: {
-				return this.formatStatus();
+				return this.formatStatus(dataKey);
 			}
 			case tableColumnNames.TIME: {
 				const time = getData(this.props.data, dataKey);
@@ -48,7 +62,7 @@ class BoardTableRow extends Component {
 		const tableConfig = getTableColumnsConfig(this.props.locale, this.props.currentView);
 
 		return (
-			<TableRow className={this.props.styles}>
+			<TableRow className={this.props.classes.row}>
 				{tableConfig
 					.map(item => (
 							<BoardTableCell key={item.label}>
@@ -66,7 +80,7 @@ BoardTableRow.propTypes = {
 	locale: PropTypes.string,
 	currentView: PropTypes.string,
 	data: PropTypes.object,
-	styles: PropTypes.string
+	classes: PropTypes.object
 };
 
 export default BoardTableRow;

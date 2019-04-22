@@ -10,7 +10,7 @@ import { injectIntl } from 'react-intl';
 // Styles
 import styles from './SearchBoxStyles';
 import searchIcon from '../../icons/search-icon.svg';
-import { FormattedMessage } from 'react-intl.macro';
+import { FormattedMessage } from 'react-intl';
 
 const SearchBox = props => {
 	const inputRef = React.createRef();

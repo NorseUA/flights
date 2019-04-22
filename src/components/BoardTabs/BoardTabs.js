@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 // Components
-import { FormattedMessage } from 'react-intl.macro';
+import { FormattedMessage } from 'react-intl';
 import { Tabs, Tab } from '@material-ui/core';
 
 // Utils

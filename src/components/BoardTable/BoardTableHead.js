@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 // Components
 import { TableRow,TableHead } from '@material-ui/core';
-import { FormattedMessage } from 'react-intl.macro';
+import { FormattedMessage } from 'react-intl';
 import BoardTableCell from './BoardTableCell';
 
 // Utils

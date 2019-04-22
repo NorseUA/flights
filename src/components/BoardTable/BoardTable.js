@@ -22,7 +22,7 @@ function BoardTable(props) {
 					<BoardTableRow
 						currentView={currentView}
 						locale={locale}
-						styles={classes.row}
+						classes={classes}
 						data={flight}
 						key={flight.ID}
 					/>

@@ -1,16 +1,22 @@
+// Modules
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { addLocaleData, IntlProvider } from 'react-intl';
 import enLocaleData from 'react-intl/locale-data/en';
 import uaLocaleData from 'react-intl/locale-data/uk';
-import './index.css';
+
+// Component
 import App from './App';
+
+// Utils
 import * as serviceWorker from './serviceWorker';
 import translations from './i18n/locales';
 import { defaultLocale } from './configs';
 
-addLocaleData(uaLocaleData);
-addLocaleData(enLocaleData);
+// Styles
+import './index.css';
+
+addLocaleData([ ...uaLocaleData, ...enLocaleData ]);
 
 const renderApp = (locale) => ReactDOM.render(
 	<IntlProvider

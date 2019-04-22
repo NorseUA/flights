@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core';
 
 // Components
 import { LinearProgress } from '@material-ui/core';
-import { FormattedMessage } from 'react-intl.macro';
+import { FormattedMessage } from 'react-intl';
 import { BoardTable, BoardTabs, CustomDatePicker, DateTabs } from '../../components';
 
 // Styles

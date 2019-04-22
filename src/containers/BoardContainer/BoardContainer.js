@@ -6,7 +6,7 @@ import { injectIntl } from 'react-intl';
 // Components
 import { Board, SearchBox } from '../../components';
 import { Dialog, DialogContent, DialogContentText, DialogTitle, Typography, withStyles } from '@material-ui/core';
-import { FormattedMessage } from 'react-intl.macro';
+import { FormattedMessage } from 'react-intl';
 
 // Utils
 import { endpoints } from '../../configs';
