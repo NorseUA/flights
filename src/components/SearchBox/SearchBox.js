@@ -12,26 +12,36 @@ import styles from './SearchBoxStyles';
 import searchIcon from '../../icons/search-icon.svg';
 import { FormattedMessage } from 'react-intl';
 
-const SearchBox = props => {
+const SearchBox = ({ handleSearch, intl, classes }) => {
 	const inputRef = React.createRef();
 
-	const handleSearch = () => {
+	const clickHandler = () => {
 		const query = inputRef.current.value || '';
-		props.handleSearch(query);
+		handleSearch(query);
+	};
+
+	const keyDownHandler = (evt) => {
+		const { keyCode, target } = evt;
+
+		if (+keyCode === 13) {
+			handleSearch(target.value);
+			target.blur();
+		}
 	};
 
 	return (
-		<div className={props.classes.boxWrapper}>
-			<div className={props.classes.inputWrapper}>
+		<div className={classes.boxWrapper}>
+			<div className={classes.inputWrapper}>
 				<input
 					ref={inputRef}
 					type="text"
-					placeholder={(props.intl.messages['searchBox.placeholder'])}
+					onKeyDown={keyDownHandler}
+					placeholder={(intl.messages['searchBox.placeholder'])}
 				/>
 				<img src={searchIcon} alt=""/>
 			</div>
-			<Button onClick={handleSearch} className={props.classes.button} color="primary" variant="contained">
-				<FormattedMessage id="searchBox.button" />
+			<Button onClick={clickHandler} className={classes.button} color="primary" variant="contained">
+				<FormattedMessage id="searchBox.button" defaultMessage="Search" />
 			</Button>
 		</div>
 	);
@@ -39,6 +49,7 @@ const SearchBox = props => {
 
 SearchBox.propTypes = {
 	intl: PropTypes.object,
+	classes: PropTypes.object,
 	handleSearch: PropTypes.func
 };
 

@@ -51,7 +51,8 @@ const styles = (theme) => ({
 		transition: '.3s ease-in-out',
 
 		'&:hover': {
-			borderTopRightRadius: '40px'
+			borderTopRightRadius: '40px',
+			backgroundColor: theme.palette.primary.main
 		},
 
 		[theme.breakpoints.down('sm')]: {

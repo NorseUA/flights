@@ -11,26 +11,22 @@ import BoardTableRow from './BoardTableRow';
 // Styles
 import styles from './BoardTableStyles';
 
-function BoardTable(props) {
-	const { classes, flightsData, locale, currentView } = props;
-
-	return (
-		<Table className={classes.table}>
-			<BoardTableHead locale={locale} className={classes.head}/>
-			<TableBody>
-				{flightsData.map(flight => (
-					<BoardTableRow
-						currentView={currentView}
-						locale={locale}
-						classes={classes}
-						data={flight}
-						key={flight.ID}
-					/>
-				))}
-			</TableBody>
-		</Table>
-	);
-}
+const BoardTable = ({ classes, flightsData, locale, currentView }) => (
+	<Table className={classes.table}>
+		<BoardTableHead locale={locale} className={classes.head}/>
+		<TableBody>
+			{flightsData.map(flight => (
+				<BoardTableRow
+					currentView={currentView}
+					locale={locale}
+					classes={classes}
+					data={flight}
+					key={flight.ID}
+				/>
+			))}
+		</TableBody>
+	</Table>
+);
 
 BoardTable.propTypes = {
 	locale: PropTypes.string,

@@ -1,5 +1,5 @@
 // Modules
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -13,32 +13,29 @@ import { tabTypes } from './constants';
 // Styles
 import styles from './BoardTabsStyles';
 
-class BoardTabs extends Component {
-	renderTab = (classes, type) => (
+const BoardTabs = ({ classes, currentView, changeView }) => {
+	const renderTab = (classes, type) => (
 		<Tab
 			value={type}
-			label={(<FormattedMessage id={`tab.${type}.label`}/>)}
+			label={(<FormattedMessage id={`tab.${type}.label`} defaultMessage={type} />)}
 			classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
 		/>
 	);
 
-	render() {
-		const { classes } = this.props;
+	return (
+		<Tabs
+			onChange={changeView}
+			value={currentView}
+			variant="fullWidth"
+			TabIndicatorProps={{ style: { backgroundColor: 'transparent' } }}
+			classes={{ root: classes.wrapper }}
+		>
+			{renderTab(classes, tabTypes.DEPARTURE)}
+			{renderTab(classes, tabTypes.ARRIVAL)}
+		</Tabs>
+	);
+};
 
-		return (
-			<Tabs
-				onChange={this.props.changeView}
-				value={this.props.currentView}
-				variant="fullWidth"
-				TabIndicatorProps={{ style: { backgroundColor: 'transparent' } }}
-				classes={{ root: classes.wrapper }}
-			>
-				{this.renderTab(classes, tabTypes.DEPARTURE)}
-				{this.renderTab(classes, tabTypes.ARRIVAL)}
-			</Tabs>
-		);
-	}
-}
 
 BoardTabs.propTypes = {
 	classes: PropTypes.object.isRequired,

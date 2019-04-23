@@ -16,10 +16,12 @@ describe('Utils. getDataByPath', () => {
 			const value = getData(mockData, 'obolonBear');
 			const anotherValue = getData(mockData, 'obolon.bear');
 			const oneMoreValue = getData(mockData, 'obolon.bear.is.better.than.guinness');
+			const deepValue = getData(mockData, 'rock.and.pop');
 
 			expect(value).toBeUndefined();
 			expect(anotherValue).toBeUndefined();
 			expect(oneMoreValue).toBeUndefined();
+			expect(deepValue).toBeUndefined();
 	});
 
 	it('should return value with simple path', () => {

@@ -42,7 +42,7 @@ class BoardContainer extends Component {
 
 	fetchSucceeded = (formattedDate, data) => this.setState({
 		loading: false,
-		flightsData: formatFlightsData(data.body),
+		flightsData: formatFlightsData(data),
 		currentDate: formattedDate
 	});
 
@@ -60,12 +60,8 @@ class BoardContainer extends Component {
 		this.setState({ loading: true });
 
 		callApi({ endpoint: `${endpoints.FLIGHTS}/${formattedDate}` })
-			.then((data) => {
-				if (data && data.error && data.error.code === 200) {
-					return this.fetchSucceeded(formattedDate, data)
-				}
-				return this.fetchFailed(formattedDate, data);
-			})
+			.then((data) => this.fetchSucceeded(formattedDate, data))
+			.catch((err) => this.fetchFailed(formattedDate, err))
 	};
 
 	changeView = (event, value) => {
@@ -102,7 +98,7 @@ class BoardContainer extends Component {
 		return (
 			<Fragment>
 				<Typography variant="h2" color="inherit" className={this.props.classes.mainTitle}>
-					<FormattedMessage id="mainTitle"/>
+					<FormattedMessage id="mainTitle" defaultMessage="Search flights" />
 				</Typography>
 				<SearchBox handleSearch={this.handleSearchByQuery} />
 				<Board
@@ -119,10 +115,10 @@ class BoardContainer extends Component {
 					open={this.state.showMessage}
 					onClose={this.handleCloseMessage}
 				>
-					<DialogTitle><FormattedMessage id="error"/></DialogTitle>
+					<DialogTitle><FormattedMessage id="error" defaultMessage="error" /></DialogTitle>
 					<DialogContent>
 						<DialogContentText>
-							<FormattedMessage id="error.defaultMessage"/>
+							<FormattedMessage id="error.defaultMessage" defaultMessage="Try again later" />
 						</DialogContentText>
 					</DialogContent>
 				</Dialog>

@@ -1,5 +1,5 @@
 // Modules
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core';
 
@@ -11,47 +11,44 @@ import { BoardTable, BoardTabs, CustomDatePicker, DateTabs } from '../../compone
 // Styles
 import styles from './BoardStyles';
 
-class Board extends Component {
-	renderNoFlightsMessage = () => (
-		<div className={this.props.classes.noFound}>
-			<FormattedMessage id="flights.noFound"/>
+const Board = ({ data, locale, classes, changeView, currentView, changeDate, currentDate, dates, loading }) => {
+	const renderNoFlightsMessage = () => (
+		<div className={classes.noFound}>
+			<FormattedMessage id="flights.noFound" defaultMessage="No found" />
 		</div>
 	);
 
-	renderContent = () => (this.props.data && this.props.data.length)
-		? (<BoardTable currentView={this.props.currentView} flightsData={this.props.data} locale={this.props.locale}/>)
-		: this.renderNoFlightsMessage();
+	const renderContent = () => (data && data.length)
+		? (<BoardTable currentView={currentView} flightsData={data} locale={locale}/>)
+		: renderNoFlightsMessage();
 
-	render() {
-		const { classes, changeView, currentView, changeDate, currentDate, dates, loading } = this.props;
-		return (
-			<div className={classes.wrapper}>
-				<BoardTabs
-					changeView={changeView}
-					currentView={currentView}
-				/>
-				<div className={classes.contentWrapper}>
-					<div className={classes.datePanel}>
-						<CustomDatePicker
-							changeDate={changeDate}
-							currentDate={currentDate}
-						/>
-						<DateTabs
-							changeDate={changeDate}
-							currentDate={currentDate}
-							dates={dates}
-						/>
-					</div>
-					{
-						loading
-							? (<LinearProgress/>)
-							: (this.renderContent())
-					}
+	return (
+		<div className={classes.wrapper}>
+			<BoardTabs
+				changeView={changeView}
+				currentView={currentView}
+			/>
+			<div className={classes.contentWrapper}>
+				<div className={classes.datePanel}>
+					<CustomDatePicker
+						changeDate={changeDate}
+						currentDate={currentDate}
+					/>
+					<DateTabs
+						changeDate={changeDate}
+						currentDate={currentDate}
+						dates={dates}
+					/>
 				</div>
+				{
+					loading
+						? (<LinearProgress/>)
+						: (renderContent())
+				}
 			</div>
-		);
-	}
-}
+		</div>
+	);
+};
 
 Board.propTypes = {
 	locale: PropTypes.string,

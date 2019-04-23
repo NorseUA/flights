@@ -10,12 +10,12 @@ import BoardTableCell from './BoardTableCell';
 // Utils
 import getTableColumnsConfig from '../../utils/getTableConfig';
 
-const BoardTableHead = (props) => (
-	<TableHead className={props.className}>
+const BoardTableHead = ({ className, locale}) => (
+	<TableHead className={className}>
 		<TableRow>
-			{getTableColumnsConfig(props.locale).map(item => (
+			{getTableColumnsConfig(locale).map(item => (
 				<BoardTableCell key={item.label}>
-					<FormattedMessage id={`table.head.${item.label}`}/>
+					<FormattedMessage id={`table.head.${item.label}`} defaultMessage={item.label} />
 				</BoardTableCell>
 			))}
 		</TableRow>

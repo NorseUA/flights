@@ -1,5 +1,5 @@
 // Modules
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 // Components
@@ -13,23 +13,21 @@ import getStatuses from '../../utils/getStatuses';
 import getTableColumnsConfig, { tableColumnNames } from '../../utils/getTableConfig';
 import getTerminalColor from '../../utils/getTerminalColor';
 
-class BoardTableRow extends Component {
-	formatStatus = (dataKey) => {
-		const { data, currentView } = this.props;
+const BoardTableRow = ({ locale, currentView, data, classes }) => {
+	const formatStatus = (dataKey) => {
 		const statuses = getStatuses(currentView);
 		const status = statuses[data[dataKey]] || { label: data[dataKey] };
 		const statusTime = status.timeKey ? getData(data, status.timeKey) : null;
 
 		return (
 			<>
-				<FormattedMessage id={`flight.status.${status.label}`}/>&nbsp;{statusTime && (
+				<FormattedMessage id={`flight.status.${status.label}`} defaultMessage={status.label} />&nbsp;{statusTime && (
 				<FormattedTime value={statusTime}/>)}
 			</>
 		);
 	};
 
-	renderTerminal = (dataKey) => {
-		const { data, classes } = this.props;
+	const renderTerminal = (dataKey) => {
 		const terminal = getData(data, dataKey) || '';
 		const color = getTerminalColor(terminal);
 
@@ -38,43 +36,41 @@ class BoardTableRow extends Component {
 		);
 	};
 
-	renderContent = ({ label, dataKey, additional }) => {
+	const renderContent = ({ label, dataKey, additional }) => {
 		switch (label) {
 			case tableColumnNames.TERMINAL: {
-				return this.renderTerminal(dataKey);
+				return renderTerminal(dataKey);
 			}
 			case tableColumnNames.STATUS: {
-				return this.formatStatus(dataKey);
+				return formatStatus(dataKey);
 			}
 			case tableColumnNames.TIME: {
-				const time = getData(this.props.data, dataKey);
+				const time = getData(data, dataKey);
 				return (<FormattedTime value={time}/>);
 			}
 			default: {
-				const data = getData(this.props.data, dataKey);
-				const additionalData = additional ? getData(this.props.data, additional) : '';
-				return `${data}${additionalData}`;
+				const value = getData(data, dataKey);
+				const additionalValue = additional ? getData(data, additional) : '';
+				return `${value}${additionalValue}`;
 			}
 		}
 	};
 
-	render() {
-		const tableConfig = getTableColumnsConfig(this.props.locale, this.props.currentView);
+	const tableConfig = getTableColumnsConfig(locale, currentView);
 
-		return (
-			<TableRow className={this.props.classes.row}>
-				{tableConfig
-					.map(item => (
-							<BoardTableCell key={item.label}>
-								{this.renderContent(item)}
-							</BoardTableCell>
-						)
+	return (
+		<TableRow className={classes.row}>
+			{tableConfig
+				.map(item => (
+						<BoardTableCell key={item.label}>
+							{renderContent(item)}
+						</BoardTableCell>
 					)
-				}
-			</TableRow>
-		);
-	}
-}
+				)
+			}
+		</TableRow>
+	);
+};
 
 BoardTableRow.propTypes = {
 	locale: PropTypes.string,

@@ -14,8 +14,13 @@ const callApi = ({ method = 'get', endpoint, requestData, options = {} }) => {
 		...{ [dataKey]: requestData },
 		...options
 	})
-		.then(({ data }) => data)
-		.catch(err => console.error(err))
+		.then(({ data }) => {
+			if (data && data.error && data.error.code >= 400) {
+				return Promise.reject(data.error);
+			}
+
+			return (data && data.body);
+		})
 };
 
 export default callApi;

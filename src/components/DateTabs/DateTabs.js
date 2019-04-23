@@ -14,28 +14,24 @@ const renderIcon = (date, className) => {
 	return (<span className={className}>{shortDate}</span>);
 };
 
-const DateTabs = props => {
-	const { classes, dates, currentDate, changeDate } = props;
-
-	return (
-		<Tabs
-			indicatorColor="primary"
-			value={currentDate}
-			onChange={changeDate}
-		>
-			{dates
-				.map(({ date, label }) => (
-					<Tab
-						classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
-						key={date}
-						value={date}
-						label={label}
-						icon={renderIcon(date, classes.shortDate)}
-					/>
-				))}
-		</Tabs>
-	);
-};
+const DateTabs = ({ classes, dates, currentDate, changeDate }) => (
+	<Tabs
+		indicatorColor="primary"
+		value={currentDate}
+		onChange={changeDate}
+	>
+		{dates
+			.map(({ date, label }) => (
+				<Tab
+					classes={{ root: classes.tabRoot, selected: classes.tabSelected }}
+					key={date}
+					value={date}
+					label={label}
+					icon={renderIcon(date, classes.shortDate)}
+				/>
+			))}
+	</Tabs>
+);
 
 DateTabs.propTypes = {
 	currentDate: PropTypes.string,
